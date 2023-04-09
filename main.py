@@ -21,7 +21,7 @@ img = cv2.imread('assets/images/image_1.jpeg')      # Read Image from source; ca
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)        # Above method 'cvtColor' is used to convert the given original image into grayscale for further denoising
 
-denoised = cv2.medianBlur(gray, 5)                  # Usage of 'medianBlur' filter for denoising
+blurred = cv2.medianBlur(gray, 5)                  # Usage of 'medianBlur' filter for denoising
 
 
 #   LBP Features Extraction 
@@ -32,13 +32,13 @@ denoised = cv2.medianBlur(gray, 5)                  # Usage of 'medianBlur' filt
 #   This process is repeated for each pixel in the image, 
 #   and the resulting patterns are used for classification tasks (SVMs, etc).
 
-lbp = local_binary_pattern(denoised, 8, 1)
+lbp = local_binary_pattern(blurred, 8, 1)
 
 
 lbp = np.uint8((lbp / np.max(lbp)) * 255)           # Converting LBP to 'uint8' and normalizing the values to fall in (0 - 255) range
 
 cv2.imshow('Original', gray)                        # Image Display ORIGINAL
-cv2.imshow('Denoised', denoised)                    # Image Display DENOISED
+cv2.imshow('Blurred', blurred)                    # Image Display DENOISED
 cv2.imshow('LBP', lbp)                              # Image Display LBP Feature Extracted
 cv2.waitKey(0)
 cv2.destroyAllWindows()                         
